@@ -1,0 +1,99 @@
+x0 = 2
+y0 = 0
+u0 = [x0; y0]
+
+t0 = 0
+tmax = 30
+t = collect(LinRange(t0, tmax, 1000))
+tspan = (t0, tmax)
+
+w = 7
+
+function syst(dy, y, p, t)
+    dy[1] = y[2]
+    dy[2] = -w*y[1]
+end
+
+prob = ODEProblem(syst, u0, tspan)
+sol = solve(prob, saveat=t)
+
+________________________________
+
+w = 3
+g = 9
+
+function syst(dy, y, p, t)
+    dy[1] = y[2]
+    dy[2] = -g*y[2]-w*y[1]
+end
+
+prob = ODEProblem(syst, u0, tspan)
+sol = solve(prob, saveat=t)
+
+
+________________________________
+
+w = 1
+g = 4
+
+function P(t)
+    return cos(2*t)
+end
+
+function syst(dy, y, p, t)
+    dy[1] = y[2]
+    dy[2] = -g*y[2]-w*y[1] + P(t)
+end
+
+prob = ODEProblem(syst, u0, tspan)
+sol = solve(prob, saveat=t)
+
+________________________________
+
+
+model lab4
+
+Real x(start=2);
+Real y(start=0);
+
+parameter Real w = 3;
+
+equation
+  der(x) = y;
+  der(y) = -w*x;
+
+end lab4;
+
+
+________________________________
+
+model lab4
+
+Real x(start=2);
+Real y(start=0);
+
+parameter Real w = 3;
+parameter Real g = 9;
+
+equation
+  der(x) = y;
+  der(y) = -g*y-w*x;
+
+end lab4;
+
+________________________________
+
+
+model lab4
+
+Real x(start=2);
+Real y(start=0);
+
+parameter Real w = 1;
+parameter Real g = 4;
+
+equation
+  der(x) = y;
+  der(y) = -g*y-w*x + cos(2*time);
+
+end lab4;
