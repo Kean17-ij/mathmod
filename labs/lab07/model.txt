@@ -1,0 +1,37 @@
+model pr7
+
+parameter Real a = 0.95;
+parameter Real b = 0.0008;
+parameter Real N = 995;
+
+Real n(start=9);
+
+equation
+ der(n) = (a+b*n)*(N-n);
+end pr7;
+
+
+model pr7
+
+parameter Real a = 0.000095;
+parameter Real b = 0.92;
+parameter Real N = 995;
+
+Real n(start=9);
+
+equation
+ der(n) = (a+b*n)*(N-n);
+end pr7;
+
+
+model pr7
+
+parameter Real a = 0.95;
+parameter Real b = 0.93;
+parameter Real N = 995;
+
+Real n(start=9);
+
+equation
+ der(n) = (a*sin(time)+b*cos(9*time)*n)*(N-n);
+end pr7;
